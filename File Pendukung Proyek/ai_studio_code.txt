@@ -1,0 +1,21 @@
+/aac-freshmart/
+|-- index.php             (Landing Page utama)
+|-- login.php             (Halaman formulir login)
+|-- process_login.php     (Logika untuk memproses login)
+|-- logout.php            (Proses untuk keluar dari sesi)
+|-- admin_dashboard.php   (Halaman khusus untuk Admin)
+|-- user_dashboard.php    (Halaman khusus untuk User)
+|-- db_connection.php     (File untuk koneksi ke database)
+|
+|-- /assets/
+|   |-- /css/
+|   |   |-- style.css     (File CSS kustom Anda)
+|   |
+|   |-- /js/
+|   |   |-- script.js     (File JavaScript kustom Anda)
+|   |
+|   |-- /images/
+|       |-- logo.png
+|       |-- hero-image.jpg
+|       |-- carousel1.jpg
+|       |-- carousel2.jpg

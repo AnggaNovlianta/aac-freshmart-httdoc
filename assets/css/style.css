@@ -1,0 +1,45 @@
+/* Import Font dari Google Fonts */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Hero Section Style */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    /* background-size dan color bisa tetap ada atau dihapus karena sudah di-handle inline */
+    background-size: cover; 
+    color: white;
+}
+
+/* Efek Overlay Gelap pada Hero Section */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6); /* Warna hitam dengan 60% transparansi */
+    z-index: 1;
+}
+
+/* Pastikan konten hero berada di atas overlay */
+.hero-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* Carousel Style */
+#productCarousel img {
+    height: 500px;
+    object-fit: cover; /* Gambar akan terpotong agar pas tanpa distorsi */
+}
+
+/* Atur warna overlay caption carousel agar lebih terbaca */
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: .5rem;
+    padding: 1rem;
+}
