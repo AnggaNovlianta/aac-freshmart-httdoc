@@ -1,0 +1,18 @@
+# Ignore Composer dependencies
+/vendor/
+
+# Ignore log files
+*.log
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE/Editor specific files
+.idea/
+.vscode/
+
+# Ignore environment configuration files
+# These often contain sensitive credentials
+.env
+
