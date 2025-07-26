@@ -112,7 +112,9 @@ if ($slides_result && $slides_result->num_rows > 0) {
         <div class="container text-center text-white">
             <h1 class="display-3 fw-bold"><?php echo htmlspecialchars($settings['hero_title'] ?? 'Judul Default'); ?></h1>
             <p class="lead my-3 fs-4"><?php echo htmlspecialchars($settings['hero_subtitle'] ?? 'Subjudul Default'); ?></p>
-            <a href="#produk-unggulan" class="btn btn-primary btn-lg mt-3 fw-bold">Lihat Produk Kami</a>
+            <a href="#produk-unggulan" class="btn btn-primary btn-lg mt-3 fw-bold">
+    <?php echo htmlspecialchars($settings['hero_button_text'] ?? 'Lihat Produk Kami'); ?>
+</a>
         </div>
     </header>
 
@@ -152,47 +154,51 @@ if ($slides_result && $slides_result->num_rows > 0) {
         </div>
     </section>
 
-    <!-- Keunggulan Kami Section (BARU) -->
-    <section id="keunggulan-kami" class="py-5 bg-light">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="fw-bold">Mengapa Memilih Kami?</h2>
-                <p class="text-muted">Kami lebih dari sekedar distributor. Kami adalah mitra pertumbuhan bisnis Anda.</p>
-            </div>
-            <div class="row text-center g-4">
-                <!-- Keunggulan 1: Kualitas -->
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm border-0 p-4">
-                        <div class="feature-icon mx-auto">
-                            <i class="fa-solid fa-award"></i>
-                        </div>
-                        <h5 class="card-title fw-bold mt-3">Kualitas Terjamin</h5>
-                        <p class="card-text">Kami hanya bekerja sama dengan produsen terkemuka untuk memastikan produk yang Anda terima memiliki kualitas terbaik.</p>
-                    </div>
-                </div>
-                <!-- Keunggulan 2: Keandalan -->
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm border-0 p-4">
-                        <div class="feature-icon mx-auto">
-                            <i class="fa-solid fa-truck-fast"></i>
-                        </div>
-                        <h5 class="card-title fw-bold mt-3">Pengiriman Tepat Waktu</h5>
-                        <p class="card-text">Dengan sistem logistik modern, kami menjamin pesanan Anda tiba sesuai jadwal untuk menjaga kelancaran operasional Anda.</p>
-                    </div>
-                </div>
-                <!-- Keunggulan 3: Pelayanan -->
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm border-0 p-4">
-                        <div class="feature-icon mx-auto">
-                            <i class="fa-solid fa-headset"></i>
-                        </div>
-                        <h5 class="card-title fw-bold mt-3">Layanan Pelanggan</h5>
-                        <p class="card-text">Tim kami siap membantu Anda dengan responsif untuk setiap pertanyaan, pesanan, dan kebutuhan spesifik Anda.</p>
-                    </div>
-                </div>
-            </div>
+    <!-- Keunggulan Kami Section (Versi Dinamis) -->
+<section id="keunggulan-kami" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold"><?php echo htmlspecialchars($settings['features_headline'] ?? 'Mengapa Memilih Kami?'); ?></h2>
+            <p class="text-muted"><?php echo htmlspecialchars($settings['features_subheadline'] ?? 'Kami adalah mitra pertumbuhan bisnis Anda.'); ?></p>
         </div>
-    </section>
+        <div class="row text-center g-4">
+            
+            <!-- Keunggulan 1 (Dinamis) -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0 p-4">
+                    <div class="feature-icon mx-auto">
+                        <i class="<?php echo htmlspecialchars($settings['feature_1_icon_class'] ?? 'fa-solid fa-award'); ?>"></i>
+                    </div>
+                    <h5 class="card-title fw-bold mt-3"><?php echo htmlspecialchars($settings['feature_1_title'] ?? 'Kualitas Terjamin'); ?></h5>
+                    <p class="card-text"><?php echo htmlspecialchars($settings['feature_1_text'] ?? 'Teks default untuk keunggulan pertama.'); ?></p>
+                </div>
+            </div>
+            
+            <!-- Keunggulan 2 (Dinamis) -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0 p-4">
+                    <div class="feature-icon mx-auto">
+                        <i class="<?php echo htmlspecialchars($settings['feature_2_icon_class'] ?? 'fa-solid fa-truck-fast'); ?>"></i>
+                    </div>
+                    <h5 class="card-title fw-bold mt-3"><?php echo htmlspecialchars($settings['feature_2_title'] ?? 'Pengiriman Tepat Waktu'); ?></h5>
+                    <p class="card-text"><?php echo htmlspecialchars($settings['feature_2_text'] ?? 'Teks default untuk keunggulan kedua.'); ?></p>
+                </div>
+            </div>
+
+            <!-- Keunggulan 3 (Dinamis) -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0 p-4">
+                    <div class="feature-icon mx-auto">
+                        <i class="<?php echo htmlspecialchars($settings['feature_3_icon_class'] ?? 'fa-solid fa-headset'); ?>"></i>
+                    </div>
+                    <h5 class="card-title fw-bold mt-3"><?php echo htmlspecialchars($settings['feature_3_title'] ?? 'Layanan Pelanggan'); ?></h5>
+                    <p class="card-text"><?php echo htmlspecialchars($settings['feature_3_text'] ?? 'Teks default untuk keunggulan ketiga.'); ?></p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
 
     <!-- Produk Unggulan (Carousel) Section -->
     <section id="produk-unggulan" class="py-5">
@@ -234,60 +240,69 @@ if ($slides_result && $slides_result->num_rows > 0) {
         </div>
     </section>
 
-    <!-- Call to Action (CTA) Section (BARU) -->
-    <section id="cta" class="py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center text-white">
-                    <h2 class="fw-bold">Siap Meningkatkan Kualitas Pasokan Anda?</h2>
-                    <p class="fs-5 my-4">Jadikan AAC Freshmart sebagai mitra andalan Anda. Hubungi kami hari ini untuk konsultasi dan dapatkan penawaran terbaik untuk bisnis Anda.</p>
-                    <a href="#" class="btn btn-light btn-lg fw-bold">
-                        <i class="fa-solid fa-phone-volume"></i> Hubungi Kami Sekarang
-                    </a>
-                </div>
+    <!-- Call to Action (CTA) Section (Versi Dinamis) -->
+<section id="cta" class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center text-white">
+                <h2 class="fw-bold"><?php echo htmlspecialchars($settings['cta_headline'] ?? 'Siap Meningkatkan Kualitas Pasokan Anda?'); ?></h2>
+                <p class="fs-5 my-4"><?php echo htmlspecialchars($settings['cta_text'] ?? 'Hubungi kami hari ini untuk konsultasi dan dapatkan penawaran terbaik.'); ?></p>
+                <a href="<?php echo htmlspecialchars($settings['social_whatsapp_url'] ?? '#'); ?>" class="btn btn-light btn-lg fw-bold">
+                    <i class="<?php echo htmlspecialchars($settings['cta_button_icon_class'] ?? 'fa-solid fa-phone-volume'); ?>"></i> 
+                    <?php echo htmlspecialchars($settings['cta_button_text'] ?? 'Hubungi Kami Sekarang'); ?>
+                </a>
             </div>
         </div>
+    </div>
+</section>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white pt-5 pb-4">
-        <div class="container text-center text-md-start">
-            <div class="row">
-                <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mb-4">
-                    <h6 class="text-uppercase fw-bold">AAC Freshmart</h6>
-                    <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #0d6efd; height: 2px"/>
-                    <p>Perusahaan distributor frozen food yang melayani pengiriman ke seluruh area dengan mengutamakan kualitas produk dan ketepatan waktu.</p>
-                </div>
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                    <h6 class="text-uppercase fw-bold">Tautan</h6>
-                     <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #0d6efd; height: 2px"/>
-                    <p><a href="#hero" class="text-white-50 text-decoration-none">Beranda</a></p>
-                    <p><a href="#tentang-kami" class="text-white-50 text-decoration-none">Tentang Kami</a></p>
-                    <p><a href="#produk-unggulan" class="text-white-50 text-decoration-none">Produk</a></p>
-                    <p><a href="login.php" class="text-white-50 text-decoration-none">Login</a></p>
-                </div>
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                    <h6 class="text-uppercase fw-bold">Tautan Sosial</h6>
-                    <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #0d6efd; height: 2px"/>
-                    <div>
-                        <a href="#" class="footer-social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="footer-social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="footer-social-link"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-md-0 mb-4">
-                    <h6 class="text-uppercase fw-bold">Hubungi Kami</h6>
-                     <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #0d6efd; height: 2px"/>
-                    <p><i class="fas fa-home me-3"></i> Jl. Industri Raya No. 1, Jakarta</p>
-                    <p><i class="fas fa-envelope me-3"></i> info@aacfreshmart.com</p>
-                    <p><i class="fas fa-phone me-3"></i> +62 21 1234 5678</p>
+    <!-- Footer (Versi Dinamis yang Benar) -->
+<footer class="bg-dark text-white pt-5 pb-4">
+    <div class="container text-center text-md-start">
+        <div class="row">
+            <!-- Kolom Deskripsi Perusahaan -->
+            <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mb-4">
+                <h6 class="text-uppercase fw-bold"><?php echo htmlspecialchars($settings['company_name'] ?? 'AAC Freshmart'); ?></h6>
+                <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #0d6efd; height: 2px"/>
+                <p><?php echo htmlspecialchars($settings['footer_description'] ?? 'Deskripsi default perusahaan.'); ?></p>
+            </div>
+
+            <!-- Kolom Tautan Cepat -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                <h6 class="text-uppercase fw-bold">Tautan Cepat</h6>
+                 <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #0d6efd; height: 2px"/>
+                <p><a href="<?php echo htmlspecialchars($settings['footer_link_beranda'] ?? '#'); ?>" class="text-white-50 text-decoration-none">Beranda</a></p>
+                <p><a href="<?php echo htmlspecialchars($settings['footer_link_tentang'] ?? '#'); ?>" class="text-white-50 text-decoration-none">Tentang Kami</a></p>
+                <p><a href="<?php echo htmlspecialchars($settings['footer_link_produk'] ?? '#'); ?>" class="text-white-50 text-decoration-none">Produk</a></p>
+                <p><a href="<?php echo htmlspecialchars($settings['footer_link_login'] ?? '#'); ?>" class="text-white-50 text-decoration-none">Login</a></p>
+            </div>
+
+            <!-- Kolom Tautan Sosial -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                <h6 class="text-uppercase fw-bold">Tautan Sosial</h6>
+                <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #0d6efd; height: 2px"/>
+                <div>
+                    <a href="<?php echo htmlspecialchars($settings['social_facebook_url'] ?? '#'); ?>" class="footer-social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="<?php echo htmlspecialchars($settings['social_instagram_url'] ?? '#'); ?>" class="footer-social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="<?php echo htmlspecialchars($settings['social_whatsapp_url'] ?? '#'); ?>" class="footer-social-link"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
+
+            <!-- Kolom Kontak -->
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-md-0 mb-4">
+                <h6 class="text-uppercase fw-bold">Hubungi Kami</h6>
+                 <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #0d6efd; height: 2px"/>
+                <p><i class="fas fa-home me-3"></i> <?php echo htmlspecialchars($settings['contact_address'] ?? 'Alamat default.'); ?></p>
+                <p><i class="fas fa-envelope me-3"></i> <?php echo htmlspecialchars($settings['contact_email'] ?? 'email@default.com'); ?></p>
+                <p><i class="fas fa-phone me-3"></i> <?php echo htmlspecialchars($settings['contact_phone'] ?? 'Nomor telepon default.'); ?></p>
+            </div>
         </div>
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-            © <?php echo date('Y'); ?> AAC Freshmart. All Rights Reserved.
-        </div>
-    </footer>
+    </div>
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        © <?php echo date('Y'); ?> <?php echo htmlspecialchars($settings['company_name'] ?? 'AAC Freshmart'); ?>. All Rights Reserved.
+    </div>
+</footer>
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

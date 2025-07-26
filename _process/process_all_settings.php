@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'feature_2_icon_class', 'feature_2_title', 'feature_2_text',
         'feature_3_icon_class', 'feature_3_title', 'feature_3_text',
         'footer_description', 'social_facebook_url', 'social_instagram_url', 'social_whatsapp_url',
-        'contact_address', 'contact_email', 'contact_phone'
+        'contact_address', 'contact_email', 'contact_phone', 'cta_headline','cta_text','cta_button_text','cta_button_icon_class'
     ];
 
     // Loop dan update semua pengaturan teks

@@ -136,27 +136,98 @@ $next_order_number = ($order_result->fetch_assoc()['max_order'] ?? 0) + 1;
                 <?php endfor; ?>
             </div>
         </div>
-
-        <!-- Kartu Footer -->
-        <div class="card shadow-sm mb-4">
-            <div class="card-header"><h4><i class="fa fa-phone me-2"></i>Footer & Kontak</h4></div>
-            <div class="card-body">
-                <div class="mb-3">
-                    <label for="footer_description" class="form-label">Deskripsi di Footer</label>
-                    <textarea class="form-control" name="footer_description" id="footer_description" rows="3"><?php echo htmlspecialchars($settings['footer_description'] ?? ''); ?></textarea>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 mb-3"><label>URL Facebook</label><input type="text" class="form-control" name="social_facebook_url" value="<?php echo htmlspecialchars($settings['social_facebook_url'] ?? ''); ?>"></div>
-                    <div class="col-md-4 mb-3"><label>URL Instagram</label><input type="text" class="form-control" name="social_instagram_url" value="<?php echo htmlspecialchars($settings['social_instagram_url'] ?? ''); ?>"></div>
-                    <div class="col-md-4 mb-3"><label>URL WhatsApp</label><input type="text" class="form-control" name="social_whatsapp_url" value="<?php echo htmlspecialchars($settings['social_whatsapp_url'] ?? ''); ?>"></div>
-                </div>
-                 <div class="row">
-                    <div class="col-md-4 mb-3"><label>Alamat</label><input type="text" class="form-control" name="contact_address" value="<?php echo htmlspecialchars($settings['contact_address'] ?? ''); ?>"></div>
-                    <div class="col-md-4 mb-3"><label>Email</label><input type="email" class="form-control" name="contact_email" value="<?php echo htmlspecialchars($settings['contact_email'] ?? ''); ?>"></div>
-                    <div class="col-md-4 mb-3"><label>Telepon</label><input type="text" class="form-control" name="contact_phone" value="<?php echo htmlspecialchars($settings['contact_phone'] ?? ''); ?>"></div>
-                </div>
+        <!-- ✅ KARTU BARU: Call to Action (CTA) -->
+<div class="card shadow-sm mb-4">
+    <div class="card-header"><h4><i class="fa fa-bullhorn me-2"></i>Call to Action (CTA)</h4></div>
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="cta_headline" class="form-label">Judul CTA</label>
+            <input type="text" class="form-control" name="cta_headline" id="cta_headline" value="<?php echo htmlspecialchars($settings['cta_headline'] ?? ''); ?>">
+        </div>
+        <div class="mb-3">
+            <label for="cta_text" class="form-label">Teks CTA</label>
+            <textarea class="form-control" name="cta_text" id="cta_text" rows="3"><?php echo htmlspecialchars($settings['cta_text'] ?? ''); ?></textarea>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="cta_button_text" class="form-label">Teks Tombol CTA</label>
+                <input type="text" class="form-control" name="cta_button_text" id="cta_button_text" value="<?php echo htmlspecialchars($settings['cta_button_text'] ?? ''); ?>">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="cta_button_icon_class" class="form-label">Kelas Ikon Tombol CTA</label>
+                <input type="text" class="form-control" name="cta_button_icon_class" id="cta_button_icon_class" value="<?php echo htmlspecialchars($settings['cta_button_icon_class'] ?? ''); ?>">
+                <small class="form-text">Contoh: fa-solid fa-phone-volume</small>
             </div>
         </div>
+    </div>
+</div>
+
+            <!-- Kartu Footer (Versi Bersih & Benar) -->
+<div class="card shadow-sm mb-4">
+    <div class="card-header"><h4><i class="fa fa-phone me-2"></i>Footer & Kontak</h4></div>
+    <div class="card-body">
+        
+        <div class="mb-3">
+            <label for="footer_description" class="form-label">Deskripsi di Footer</label>
+            <textarea class="form-control" name="footer_description" id="footer_description" rows="3"><?php echo htmlspecialchars($settings['footer_description'] ?? ''); ?></textarea>
+        </div>
+
+        <h5 class="mt-4">Tautan Cepat (Menu Footer)</h5>
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <label class="form-label">URL Beranda</label>
+                <input type="text" class="form-control" name="footer_link_beranda" value="<?php echo htmlspecialchars($settings['footer_link_beranda'] ?? ''); ?>">
+            </div>
+            <div class="col-md-3 mb-3">
+                <label class="form-label">URL Tentang Kami</label>
+                <input type="text" class="form-control" name="footer_link_tentang" value="<?php echo htmlspecialchars($settings['footer_link_tentang'] ?? ''); ?>">
+            </div>
+            <div class="col-md-3 mb-3">
+                <label class="form-label">URL Produk</label>
+                <input type="text" class="form-control" name="footer_link_produk" value="<?php echo htmlspecialchars($settings['footer_link_produk'] ?? ''); ?>">
+            </div>
+            <div class="col-md-3 mb-3">
+                <label class="form-label">URL Login</label>
+                <input type="text" class="form-control" name="footer_link_login" value="<?php echo htmlspecialchars($settings['footer_link_login'] ?? ''); ?>">
+            </div>
+        </div>
+        <hr>
+
+        <h5 class="mt-4">Tautan Sosial</h5>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label class="form-label">URL Facebook</label>
+                <input type="text" class="form-control" name="social_facebook_url" value="<?php echo htmlspecialchars($settings['social_facebook_url'] ?? ''); ?>">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label class="form-label">URL Instagram</label>
+                <input type="text" class="form-control" name="social_instagram_url" value="<?php echo htmlspecialchars($settings['social_instagram_url'] ?? ''); ?>">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label class="form-label">URL WhatsApp</label>
+                <input type="text" class="form-control" name="social_whatsapp_url" value="<?php echo htmlspecialchars($settings['social_whatsapp_url'] ?? ''); ?>">
+            </div>
+        </div>
+
+        <h5 class="mt-4">Info Kontak</h5>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label class="form-label">Alamat</label>
+                <input type="text" class="form-control" name="contact_address" value="<?php echo htmlspecialchars($settings['contact_address'] ?? ''); ?>">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" name="contact_email" value="<?php echo htmlspecialchars($settings['contact_email'] ?? ''); ?>">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label class="form-label">Telepon</label>
+                <input type="text" class="form-control" name="contact_phone" value="<?php echo htmlspecialchars($settings['contact_phone'] ?? ''); ?>">
+            </div>
+        </div>
+        
+    </div>
+</div>
+        
 
         <!-- Tombol Simpan Utama -->
         <div class="d-grid gap-2">
