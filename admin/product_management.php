@@ -126,14 +126,58 @@ require '../_templates/admin_header.php';
     <?php endif; ?>
 </div>
 
-<!-- Modal Tambah & Edit Produk -->
+<!-- Modal Tambah & Edit Produk (LENGKAP) -->
 <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
-    <!-- ... (kode modal Anda yang sudah benar) ... -->
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="productModalLabel">Form Produk</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form id="productForm" action="../_process/process_product.php" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="action" id="form-action">
+        <input type="hidden" name="id" id="form-id">
+        <div class="modal-body">
+            <!-- Info Dasar -->
+            <h6>Info Dasar</h6><hr class="mt-0">
+            <div class="row">
+                <div class="col-md-8 mb-3"><label for="form-name" class="form-label">Nama Produk</label><input type="text" class="form-control" id="form-name" name="name" required></div>
+                <div class="col-md-4 mb-3"><label for="form-sku" class="form-label">SKU</label><input type="text" class="form-control" id="form-sku" name="sku" readonly></div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3"><label for="form-category" class="form-label">Kategori</label><select class="form-select" id="form-category" name="category_id" required><option value="" selected disabled>-- Pilih --</option><?php if ($categories_result->num_rows > 0) { $categories_result->data_seek(0); while($cat = $categories_result->fetch_assoc()) { echo "<option value='{$cat['id']}'>{$cat['name']}</option>"; } } ?></select></div>
+                <div class="col-md-6 mb-3"><label for="form-supplier" class="form-label">Supplier</label><select class="form-select" id="form-supplier" name="supplier_id"><option value="">-- Pilih --</option><?php if ($suppliers_result->num_rows > 0) { $suppliers_result->data_seek(0); while($sup = $suppliers_result->fetch_assoc()) { echo "<option value='{$sup['id']}'>{$sup['name']}</option>"; } } ?></select></div>
+            </div>
+            <div class="mb-3"><label for="form-description" class="form-label">Deskripsi</label><textarea class="form-control" id="form-description" name="description" rows="3"></textarea></div>
+            
+            <!-- Harga & Stok -->
+            <h6 class="mt-4">Harga & Stok</h6><hr class="mt-0">
+            <div class="row">
+                <div class="col-md-4 mb-3"><label for="form-cost-price" class="form-label">Harga Modal (Rp)</label><input type="number" class="form-control" id="form-cost-price" name="cost_price" value="0"></div>
+                <div class="col-md-4 mb-3"><label for="form-selling-price" class="form-label">Harga Jual (Rp)</label><input type="number" class="form-control" id="form-selling-price" name="selling_price" value="0" required></div>
+                <div class="col-md-4 mb-3"><label for="form-stock" class="form-label">Jumlah Stok</label><input type="number" class="form-control" id="form-stock" name="stock" value="0" required></div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3"><label for="form-low-stock" class="form-label">Ambang Stok Rendah</label><input type="number" class="form-control" id="form-low-stock" name="low_stock_threshold" value="10"></div>
+                <div class="col-md-6 mb-3"><label for="form-weight" class="form-label">Berat (Kg)</label><input type="number" class="form-control" id="form-weight" name="weight_kg" step="0.01" value="0"></div>
+            </div>
+            
+            <!-- Atribut Lain -->
+            <h6 class="mt-4">Atribut Lain</h6><hr class="mt-0">
+            <div class="mb-3"><label for="form-image" class="form-label">Gambar Produk</label><input type="file" class="form-control" id="form-image" name="image" accept="image/*"><small id="image-help-text" class="form-text text-muted"></small></div>
+            <div class="form-check form-switch mb-2"><input class="form-check-input" type="checkbox" name="is_active" value="1" id="form-is-active"><label class="form-check-label" for="form-is-active">Aktif (Tampil di website)</label></div>
+            <div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="is_featured" value="1" id="form-is-featured"><label class="form-check-label" for="form-is-featured">Jadikan Produk Unggulan</label></div>
+        </div>
+        <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button><button type="submit" class="btn btn-primary" id="form-submit-button">Simpan</button></div>
+      </form>
+    </div>
+  </div>
 </div>
 
-<!-- Form Hapus Tersembunyi -->
+<!-- Form Hapus Tersembunyi (LENGKAP) -->
 <form id="deleteForm" action="../_process/process_product.php" method="POST" style="display: none;">
-    <!-- ... (kode form hapus Anda yang sudah benar) ... -->
+    <input type="hidden" name="action" value="delete">
+    <input type="hidden" name="id" id="delete-id">
 </form>
 
 <?php
@@ -188,8 +232,80 @@ ob_start();
         });
     });
 </script>
+
+<!-- ... (setelah semua HTML: tabel, modal, form, dll.) ... -->
+
 <?php
-// Simpan output JavaScript ke variabel
+// Mulai buffer untuk menangkap semua output CSS dan JS kustom
+ob_start(); 
+?>
+
+<!-- Style kustom untuk halaman ini -->
+<style>
+    .product-thumbnail {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 0.25rem;
+        background-color: #e9ecef;
+    }
+</style>
+
+<!-- JavaScript kustom untuk halaman ini -->
+<script>
+    function confirmDelete(id) { 
+        if (confirm("Yakin ingin menghapus produk ini? Aksi ini tidak bisa dibatalkan.")) { 
+            document.getElementById('delete-id').value = id; 
+            document.getElementById('deleteForm').submit(); 
+        } 
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const productModal = new bootstrap.Modal(document.getElementById('productModal'));
+        const modal = document.getElementById('productModal');
+        const form = document.getElementById('productForm');
+
+        // Handle tombol "Tambah Produk Baru"
+        document.getElementById('addNewProductBtn').addEventListener('click', function() {
+            form.reset();
+            modal.querySelector('.modal-title').textContent = 'Tambah Produk Baru';
+            modal.querySelector('#form-action').value = 'add';
+            modal.querySelector('#form-id').value = '';
+            modal.querySelector('#form-sku').value = '(Otomatis)';
+            modal.querySelector('#image-help-text').textContent = '';
+            modal.querySelector('#form-submit-button').textContent = 'Simpan Produk';
+            productModal.show();
+        });
+
+        // Handle semua tombol "Edit"
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const productData = JSON.parse(this.getAttribute('data-product'));
+                
+                modal.querySelector('.modal-title').textContent = 'Edit Produk: ' + productData.name;
+                modal.querySelector('#form-action').value = 'edit';
+                modal.querySelector('#form-id').value = productData.id;
+                modal.querySelector('#form-name').value = productData.name;
+                modal.querySelector('#form-sku').value = productData.sku;
+                modal.querySelector('#form-category').value = productData.category_id;
+                modal.querySelector('#form-supplier').value = productData.supplier_id;
+                modal.querySelector('#form-description').value = productData.description;
+                modal.querySelector('#form-cost-price').value = productData.cost_price;
+                modal.querySelector('#form-selling-price').value = productData.selling_price;
+                modal.querySelector('#form-stock').value = productData.stock;
+                modal.querySelector('#form-low-stock').value = productData.low_stock_threshold;
+                modal.querySelector('#form-weight').value = productData.weight_kg;
+                modal.querySelector('#form-is-active').checked = (productData.is_active == 1);
+                modal.querySelector('#form-is-featured').checked = (productData.is_featured == 1);
+                modal.querySelector('#image-help-text').textContent = 'Biarkan kosong jika tidak ingin mengganti gambar.';
+                modal.querySelector('#form-submit-button').textContent = 'Simpan Perubahan';
+                productModal.show();
+            });
+        });
+    });
+</script>
+<?php
+// Simpan semua output (CSS dan JS) ke dalam satu variabel
 $page_scripts = ob_get_clean(); 
 ?>
 
