@@ -1,7 +1,7 @@
 <?php
 session_start();
 require '../_includes/db_connection.php';
-
+require '../_templates/admin_header.php'; 
 // Keamanan & ambil semua data settings
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header("Location: " . BASE_URL . "login.php?error=Akses ditolak!");
