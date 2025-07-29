@@ -81,7 +81,7 @@ $result_users = $conn->query($query_users);
         </a>
     </li>
     <li>
-        <a href="admin_dashboard.php" class="nav-link text-white">
+        <a href="management_user.php" class="nav-link text-white">
             <i class="fa fa-users"></i> Manajemen User
         </a>
     </li>
@@ -121,107 +121,7 @@ $result_users = $conn->query($query_users);
 </div>
 
 <!-- Main Content -->
-<div class="content">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded-3 mb-4">
-        <div class="container-fluid">
-            <h1 class="h3">Manajemen User</h1>
-        </div>
-    </nav>
 
-    <!-- Notifikasi -->
-    <?php if(isset($_GET['status'])): ?>
-        <?php if($_GET['status'] == 'success'): ?>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                User baru berhasil ditambahkan!
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php elseif($_GET['status'] == 'error'): ?>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Gagal!</strong> <?php echo htmlspecialchars($_GET['message']); ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php endif; ?>
-    <?php endif; ?>
-
-    <div class="card shadow-sm">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            Daftar Pengguna
-            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addUserModal">
-                <i class="fa fa-plus"></i> Tambah User Baru
-            </button>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>ID</th>
-                            <th>Nama Lengkap</th>
-                            <th>Username</th>
-                            <th>Role</th>
-                            <th>Tanggal Registrasi</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php while($user = $result_users->fetch_assoc()): ?>
-                        <tr>
-                            <td><?php echo $user['id']; ?></td>
-                            <td><?php echo htmlspecialchars($user['nama_lengkap']); ?></td>
-                            <td><?php echo htmlspecialchars($user['username']); ?></td>
-                            <td><span class="badge bg-<?php echo ($user['role'] == 'admin' ? 'success' : 'info'); ?>"><?php echo ucfirst($user['role']); ?></span></td>
-                            <td><?php echo date('d M Y, H:i', strtotime($user['created_at'])); ?></td>
-                            <td>
-                                <button class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Tambah User -->
-<div class="modal fade" id="addUserModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Form Tambah User Baru</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form action="../_process/process_add_user.php" method="POST">
-        <div class="modal-body">
-            <div class="mb-3">
-                <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
-                <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" required>
-            </div>
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" name="username" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <div class="mb-3">
-                <label for="role" class="form-label">Role</label>
-                <select class="form-select" id="role" name="role">
-                    <option value="user" selected>User</option>
-                    <option value="admin">Admin</option>
-                </select>
-            </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary">Simpan</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
 
 <!-- Bootstrap JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
