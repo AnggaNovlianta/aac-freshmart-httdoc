@@ -1,14 +1,10 @@
 <?php
 session_start();
-// BENAR: Muat koneksi dan konfigurasi untuk menggunakan BASE_URL
-require_once '_includes/db_connection.php';
+require_once '_includes/db_connection.php'; 
+require_once '_includes/auth_check.php';
 
-// Cek apakah pengguna sudah login dan memiliki role 'user'
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'user') {
-    // BENAR: Menggunakan BASE_URL untuk pengalihan yang andal
-    header("Location: " . BASE_URL . "login.php?error=Akses ditolak!");
-    exit();
-}
+// Memeriksa izin menggunakan sistem terpusat
+enforce_permission($conn);
 ?>
 <!DOCTYPE html>
 <html lang="id">

@@ -1,9 +1,11 @@
-<?php
-// Cek sesi (logika ini tetap sama)
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ". BASE_URL ."login.php?error=Akses ditolak!");
-    exit();
-}
+<?php // BARIS PALING ATAS
+// Blok keamanan terpusat
+require_once __DIR__ . '/../_includes/db_connection.php';
+require_once __DIR__ . '/../_includes/auth_check.php';
+enforce_permission($conn);
+
+// Baris di bawah ini sekarang bisa dihapus karena sudah ditangani oleh enforce_permission()
+// if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') { ... }
 
 // Dapatkan nama halaman saat ini untuk menandai menu aktif
 $current_page = basename($_SERVER['PHP_SELF']);
@@ -67,8 +69,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
                                 <i class="fa fa-truck fa-fw me-2"></i> Kelola Supplier
                             </a>
                         </li>
+                        <li>
+                            <a class="dropdown-item" href="satuan.php">
+                                <i class="fa fa-truck fa-fw me-2"></i> Kelola UoM
+                            </a>
+                        </li>
                     </ul>
                 </li>
+
                 
                 <li class="nav-item">
                     <a class="nav-link <?php if($current_page == 'settings_management.php') echo 'active'; ?>" href="settings_management.php">
