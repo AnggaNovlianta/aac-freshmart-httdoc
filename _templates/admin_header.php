@@ -76,7 +76,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
                         </li>
                     </ul>
                 </li>
-
                 
                 <li class="nav-item">
                     <a class="nav-link <?php if($current_page == 'settings_management.php') echo 'active'; ?>" href="settings_management.php">
